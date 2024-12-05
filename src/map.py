@@ -9,8 +9,8 @@ class Map:
         for y, row in enumerate(map_data):
             for x, tile in enumerate(row):
                     tile_size = 32
-                    wall_image = pygame.image.load('wall.png')
-                    floor_image = pygame.image.load('floor.png')
+                    wall_image = pygame.image.load('assets/wall.png')
+                    floor_image = pygame.image.load('assets/floor.png')
             if tile == 'x':
                     screen.blit(wall_image, (x * tile_size, y * tile_size))
             elif tile == '.':

@@ -1,4 +1,5 @@
 import pygame
+import pygame_menu
 from src.player import Player
 from src.enemy import Enemy
 from src.map import Map
@@ -7,7 +8,7 @@ class Controller:
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode((800, 600))
-        pygame.display.set_caption('RPG Game')
+        pygame.display.set_caption('Dungeon Quest')
         self.clock = pygame.time.Clock()
         self.running = True
         self.game_over = False
