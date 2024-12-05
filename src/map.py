@@ -2,8 +2,8 @@ import pygame
 
 
 class Map:
-    def draw_map(screen, map_data0):
-        f = open(map.txt, 'r')
+    def __init__(screen, map_data):
+        f = open('map.txt', 'r')
         map_data = f.readlines()
         f.close()
         for y, row in enumerate(map_data):
