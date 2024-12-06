@@ -1,41 +1,32 @@
 import pygame
-import random
-import math
 
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
-        self.image = pygame.Surface((32, 32))  # Enemy size
-        self.image.fill((255, 0, 0))  # Red color for the enemy
+        self.image = pygame.Surface((50, 50))  # Enemy size
+        self.image.fill((255, 0, 0))  # Red color
         self.rect = self.image.get_rect()
-        self.rect.center = (x, y)
+        self.rect.x = x
+        self.rect.y = y
+        self.health = 50
+        self.attack_damage = 5
         self.speed = 2
 
-    def update(self, player, screen_width, screen_height):
-        # AI: Chase the player if within range
-        player_pos = player.rect.center
-        enemy_pos = self.rect.center
-        distance = math.hypot(player_pos[0] - enemy_pos[0], player_pos[1] - enemy_pos[1])
-
-        # If player is close enough, chase them
-        if distance < 300:
-            direction_x = player_pos[0] - enemy_pos[0]
-            direction_y = player_pos[1] - enemy_pos[1]
-            angle = math.atan2(direction_y, direction_x)
-            self.rect.x += int(self.speed * math.cos(angle))
-            self.rect.y += int(self.speed * math.sin(angle))
-
-        # Boundaries check
-        if self.rect.left < 0:
-            self.rect.left = 0
-        if self.rect.right > screen_width:
-            self.rect.right = screen_width
-        if self.rect.top < 0:
-            self.rect.top = 0
-        if self.rect.bottom > screen_height:
-            self.rect.bottom = screen_height
+    def chase(self, player):
+        if self.rect.x < player.rect.x:
+            self.rect.x += self.speed
+        elif self.rect.x > player.rect.x:
+            self.rect.x -= self.speed
+        if self.rect.y < player.rect.y:
+            self.rect.y += self.speed
+        elif self.rect.y > player.rect.y:
+            self.rect.y -= self.speed
 
     def attack(self, player):
-        # Placeholder attack logic when in range
         if self.rect.colliderect(player.rect):
-            print("Enemy attacks the player!")
+            player.take_damage(self.attack_damage)
+
+    def take_damage(self, amount):
+        self.health -= amount
+        if self.health <= 0:
+            self.kill()

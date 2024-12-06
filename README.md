@@ -8,9 +8,9 @@ GUI Design: in assets folder
 5 Possible Features:
 1. Movable character
 2. Enemies
-3. Obstical collisions
-4. A game over screen when you die
-5. A set map/environment
+3. the ability to attack enemies
+4. Obstical collisions
+5. A game over screen when you die
 
 Extra notes: this is a skeleton of the actual game I was planning on making. I was too ambitious with what I wanted to have in the game that
 I ended up cutting out some of the features that UI would've liked to include. These features include, a lot system, animations, a final boss,
