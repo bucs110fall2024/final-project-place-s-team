@@ -56,8 +56,6 @@ class Controller:
         pygame.time.delay(2000)
         self.running = False
 
-    # def start(self):
-    #     self.start_menu()
 
 if __name__ == '__main__':
     controller = Controller()
