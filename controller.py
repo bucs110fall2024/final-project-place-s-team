@@ -13,7 +13,7 @@ class Controller:
         self.game_over = False
         self.player = Player(100, 100)
         self.enemies = pygame.sprite.Group(Enemy(200, 200), Enemy(300, 300))
-        self.all_sprites = pygame.sprite.Group(self.player, *self.enemies)
+        self.all_sprites = pygame.sprite.Group(self.player, self.enemies)
         self.map = Map('map.txt')
         self.font = pygame.font.SysFont(None, 36)
 
@@ -29,7 +29,7 @@ class Controller:
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
                     self.run_game()
 
-    def run_game(self):
+    def mainloop(self):
         while self.running:
             self.screen.fill((0, 0, 0))
             self.map.draw(self.screen)
@@ -56,8 +56,8 @@ class Controller:
         pygame.time.delay(2000)
         self.running = False
 
-    def start(self):
-        self.start_menu()
+    # def start(self):
+    #     self.start_menu()
 
 if __name__ == '__main__':
     controller = Controller()

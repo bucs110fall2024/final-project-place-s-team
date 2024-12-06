@@ -1,9 +1,7 @@
-import pygame
 from controller import Controller
 
-if __name__ == '__main__':
+def main():
     controller = Controller()
     controller.start()
-
 
 
