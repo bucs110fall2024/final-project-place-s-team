@@ -1,5 +1,4 @@
 import pygame
-import pygame_menu
 from src.player import Player
 from src.enemy import Enemy
 from src.map import Map
@@ -63,3 +62,4 @@ class Controller:
 if __name__ == '__main__':
     controller = Controller()
     controller.start()
+
