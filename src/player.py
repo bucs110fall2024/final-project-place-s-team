@@ -42,8 +42,7 @@ import pygame
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__(self)
-        self.image = pygame.Surface((50, 50))  # Player size
-        self.image.fill((0, 0, 255))  # Blue color
+        self.image = pygame.image.load('assets/explorer.png')
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -51,4 +50,16 @@ class Player(pygame.sprite.Sprite):
         self.attack_damage = 10
         self.heal_amount = 20
         self.speed = 5
+        
+    def move_up(self):
+        self.rect.y -= self.speed
+
+    def move_down(self):
+        self.rect.y += self.speed
+
+    def move_right(self):
+        self.rect.x += self.speed
+
+    def move_left(self):
+        self.rect.x -= self.speed
         
