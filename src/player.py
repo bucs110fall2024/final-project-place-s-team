@@ -1,19 +1,17 @@
 import pygame
 
-
-class Player(pygame.sprite.Sprite):
-    def __init__(self, x, y):
-        super().__init__()
-        self.image = pygame.image.load('assets/explorer.png')
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-        self.health = 100
-        self.attack_damage = 10
-        self.heal_amount = 20
+class Player:
+    def __init__(self):
+        self.rect = pygame.Rect(100, 100, 50, 50)
+        self.color = (0, 128, 255)
         self.speed = 5
+        self.attack_range = pygame.Rect(self.rect.x - 10, self.rect.y - 10, self.rect.width + 20, self.rect.height + 20)
+        self.is_attacking = False
 
-    def move(self, keys):
+    def update(self):
+        keys = pygame.key.get_pressed()
+
+        # Arrow key movement
         if keys[pygame.K_LEFT]:
             self.rect.x -= self.speed
         if keys[pygame.K_RIGHT]:
@@ -23,42 +21,24 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_DOWN]:
             self.rect.y += self.speed
 
-    def attack(self, enemies):
-        for enemy in enemies:
-            if self.rect.colliderect(enemy.rect):
-                enemy.take_damage(self.attack_damage)
+        # Attack with space
+        if keys[pygame.K_SPACE]:
+            self.attack()
 
-    def heal(self):
-        self.health += self.heal_amount
-        if self.health > 100:
-            self.health = 100
+    def attack(self):
+        self.is_attacking = True
+        self.attack_range.x = self.rect.x - 10
+        self.attack_range.y = self.rect.y - 10
 
-    def take_damage(self, amount):
-        self.health -= amount
-        if self.health <= 0:
-            self.health = 0
+    def draw(self, screen):
+        pygame.draw.rect(screen, self.color, self.rect)  # Draws the blue player box on screen
 
-# class Player(pygame.sprite.Sprite):
-#     def __init__(self, x, y):
-#         super().__init__(self)
-#         self.image = pygame.image.load('assets/explorer.png')
-#         self.rect = self.image.get_rect()
-#         self.rect.x = x
-#         self.rect.y = y
-#         self.health = 100
-#         self.attack_damage = 10
-#         self.heal_amount = 20
-#         self.speed = 5
-        
-#     def move_up(self):
-#         self.rect.y -= self.speed
+        if self.is_attacking:
+            pygame.draw.rect(screen, (255, 255, 0), self.attack_range, 2)  # Show attack range as a yellow outline
+            self.is_attacking = False
 
-#     def move_down(self):
-#         self.rect.y += self.speed
+    def check_attack_collision(self, enemy):
+        # Checks if enemy is in attack range
+        if self.attack_range.colliderect(enemy.rect):
+            enemy.take_damage()
 
-#     def move_right(self):
-#         self.rect.x += self.speed
-
-#     def move_left(self):
-#         self.rect.x -= self.speed
-        

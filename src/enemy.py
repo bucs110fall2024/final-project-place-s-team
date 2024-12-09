@@ -1,32 +1,33 @@
 import pygame
+import random
 
-class Enemy(pygame.sprite.Sprite):
-    def __init__(self, x, y):
-        super().__init__()
-        self.image = pygame.image.load('assets/enemy.png')
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-        self.health = 50
-        self.attack_damage = 5
-        self.speed = 2
+class Enemy:
+    def __init__(self):
+        self.rect = pygame.Rect(400, 300, 50, 50)
+        self.color = (255, 0, 0)
+        self.speed = 3
+        self.health = 50 
 
-    def chase(self, player):
-        if self.rect.x < player.rect.x:
-            self.rect.x += self.speed
-        elif self.rect.x > player.rect.x:
+    def update(self):
+        # Random movement for the enemy
+        direction = random.choice(["left", "right", "up", "down"])
+        if direction == "left":
             self.rect.x -= self.speed
-        if self.rect.y < player.rect.y:
-            self.rect.y += self.speed
-        elif self.rect.y > player.rect.y:
+        elif direction == "right":
+            self.rect.x += self.speed
+        elif direction == "up":
             self.rect.y -= self.speed
+        elif direction == "down":
+            self.rect.y += self.speed
 
-    def attack(self, player):
-        if self.rect.colliderect(player.rect):
-            player.take_damage(self.attack_damage)
+    def draw(self, screen):
+        pygame.draw.rect(screen, self.color, self.rect)  # Draw the red box for the enemy
 
-    def take_damage(self, amount):
-        self.health -= amount
+    def take_damage(self):
+        # Reduce health when hit
+        self.health -= 10
         if self.health <= 0:
-            self.kill()
+            print("Enemy defeated!")
+            self.rect.x = -100
+            self.rect.y = -100
 

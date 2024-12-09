@@ -22,33 +22,32 @@ Test steps:
 5. Verify the player moves down
 Expected outcome: The player's character should move up and down when the up and down arrow keys are pressed
 
-Test case 3: Test player collision 
-Test description: Verify that the player cannot move outside the boundaries of the map
+Test case 3: Test random enemy movement
+Test description: Verify the enemy (red box) is randomly moving around the screen
 Test steps:
 1. Start the game
-2. Use the arrow keys to move the character
-3. Move the player into a wall
-4. Verify the player is unable to walk through or beyond the wall
-Expected outcome: the player should be unable to walk outside the map, staying in the boundaries of the map
+2. Move toward the enemy using arrow keys
+3. Verify the enemy is moving randomly around the screen
+Expected outcome: The enemy should be moving around the screen and it should look shakey instead of not moving
 
-Test case 4: Test player attack
+Test case 4: Test Player Attack Radius
 Test description: Verify the player can attack an enemy
 Test steps:
 1. Start the game
 2. Use the arrow keys to move the player
-3. Approach an enemy
-4. Press SPACE to attack the enemy when next to them
-5. Verify the player is attacking the enemy until the enemy dies
-Expected outcome: The player should be able to attack the enemy until the enemy dies
+3. Press space
+4. Verify that when space is pressed, a yellow box appears around the player
+Expected outcome: A yellow box will appear around the players blue box when pressing space
 
-Test case 5: Test player death
-Test description: Verify that the player can die
+Test case 5: Text enemy elimination:
+Test Description: Verify the player can eliminate the enemy (red box)
 Test steps:
 1. Start the game
-2. Use the arrow keys to move the player
-3. Move the player to an enemy
-4. let the enemy attack the player
-5. DO NOT ATTACK THE ENEMY
-6. Verify that the player can die and the Game over screen appears
-Expected outcome: The player should die once hit enough by enemies and a game over screen should appear allowing you to restart
-  
+2. Move the player using arrow keys
+3. Approach the enemy
+4. Press space to attack the enemy
+5. Verify the enemy is no longer on screen and in the terminal "Enemy defeated!" is printed
+Expected outcome: When the user attacks the enemy, the enemy should be defeated and disappear off screen
+
+
+

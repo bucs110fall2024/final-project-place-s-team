@@ -1,7 +1,6 @@
 Team Members: Ryan Place
 
-Project Description: I want to code a top down, RPG game where there is a player who can move freely around the screen and attack enemies
-while exploring the set map
+Project Description: A very simple and super straight forward game where the user is a blue box and the enemy is a red box and the player can attack the red box
 
 GUI Design: in assets folder
 
@@ -12,6 +11,6 @@ GUI Design: in assets folder
 4. Obstical collisions
 5. A game over screen when you die
 
-Extra notes: this is a skeleton of the actual game I was planning on making. I was too ambitious with what I wanted to have in the game that
-I ended up cutting out some of the features that UI would've liked to include. These features include, a lot system, animations, a final boss,
-a soundtrack, and more. This is a project that I would definetly like to work on in the future and expand upon.
+Extra notes: I was trying to make something way more complex but I didn't have the knowledge nor the skill to accomplish such a task. I wanted to make an actual game with so many features such as a loot system, a map, a final boss, power-ups, and so much more but I was too ambitious and it came back to bite me. I had to really simplify the code so that I can have a running program to turn in. Its nothing great but it runs unlike what I previously had. I do plan on learning how to make a more complex game like the one I had envisioned before in the future so updates will be coming. Thank you for your cooperation Professor Moore by allowing me to edit my code past the deadline, I greatly appreciate it. I really enjoyed the class and you as a professor. I will definitely be recommending you to others in the future.
+Thank you again, 
+- Ryan Place

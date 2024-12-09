@@ -4,61 +4,54 @@ from src.enemy import Enemy
 from src.map import Map
 
 class Controller:
-    def __init__(self):
-        pygame.init()
-        self.screen = pygame.display.set_mode((800, 600))
-        pygame.display.set_caption('Dungeon Quest')
+    def __init__(self, screen):
+        self.screen = screen
         self.clock = pygame.time.Clock()
         self.running = True
         self.game_over = False
-        self.player = Player(100, 100)
-        self.enemies = pygame.sprite.Group(Enemy(200, 200), Enemy(300, 300))
-        self.all_sprites = pygame.sprite.Group(self.player, self.enemies)
-        self.map = Map('map.txt')
-        self.font = pygame.font.SysFont(None, 36)
 
-    def start_menu(self):
+    def start_game(self):
+        while self.running:
+            if self.game_over:
+                self.game_over_screen()
+            else:
+                self.main_game_loop()
+
+    def main_game_loop(self):
+        player = Player()
+        enemy = Enemy()
+        game_map = Map()
         while not self.game_over:
-            self.screen.fill((0, 0, 0))
-            title = self.font.render('Start Game', True, (255, 255, 255))
-            self.screen.blit(title, (300, 250))
-            pygame.display.flip()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    self.running = False
                     self.game_over = True
-                if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
-                    self.run_game()
 
-    def mainloop(self):
-        while self.running:
             self.screen.fill((0, 0, 0))
-            self.map.draw(self.screen)
-            keys = pygame.key.get_pressed()
-            self.player.move(keys)
-            self.player.attack(self.enemies)
-            self.enemies.update()
-            for enemy in self.enemies:
-                enemy.chase(self.player)
-                enemy.attack(self.player)
-            self.all_sprites.draw(self.screen)
+            game_map.draw(self.screen)
+            player.update()
+            player.draw(self.screen)
+            enemy.update()
+            enemy.draw(self.screen)
 
-            if self.player.health <= 0:
-                self.game_over_menu()
+            # Check for attack collision
+            player.check_attack_collision(enemy)
 
             pygame.display.flip()
             self.clock.tick(60)
 
-    def game_over_menu(self):
-        self.screen.fill((0, 0, 0))
-        game_over_text = self.font.render('Game Over', True, (255, 0, 0))
-        self.screen.blit(game_over_text, (300, 250))
+    def game_over_screen(self):
+        font = pygame.font.SysFont("Arial", 36)
+        game_over_text = font.render("Game Over! Press ESC to exit", True, (255, 255, 255))
+        self.screen.blit(game_over_text, (200, 250))
+
         pygame.display.flip()
-        pygame.time.delay(2000)
-        self.running = False
 
-
-if __name__ == '__main__':
-    controller = Controller()
-    controller.start()
-
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.running = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    self.running = False
+                    self.game_over = False
 
